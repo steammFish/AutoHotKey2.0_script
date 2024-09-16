@@ -33,7 +33,8 @@
 ; 鼠标事件
 ^!o::  ; Ctrl + Alt + O
 {
-    ; 定义八边形的点集（相对于当前鼠标位置），并添加延迟
+
+    ; 定义一个点集（x坐标、y坐标、延迟delay）
     points := [
         {x: 100, y: 0, delay: 30},
         {x: 71, y: 71, delay: 40},
@@ -45,8 +46,9 @@
         {x: 71, y: -71, delay: 40}
     ]
 
-    DrawPolygon(points)
-    ; ClickPoints(points)
+    ; 操作有两个
+    DrawPolygon(points) ; 连接点集中的每个点用鼠标绘制一个图形
+    ; ClickPoints(points)   ; 点击点集中的每个点
 }
 
 
