@@ -1,40 +1,39 @@
 ﻿; AutoHotkey v2 脚本
 
-; 打开 Windows Terminal (pwsh)
+; 快捷键：Win + T 打开 Windows Terminal (PowerShell)
 #t::  ; Win + T
 {
-    Run("wt")  ; 启动 Windows Terminal
+    Run("wt")  ; 启动 Windows Terminal (PowerShell)
 }
 
-; 关闭当前活动窗口
+; 快捷键：Ctrl + Alt + W 关闭当前活动窗口
 ^!w::  ; Ctrl + Alt + W
 {
-    WinClose("A")  ; 关闭当前活动窗口
+    WinClose("A")  ; 关闭当前活动窗口，"A" 代表当前窗口
 }
 
-; 打开 VSCode
+; 快捷键：Ctrl + Alt + V 打开 Visual Studio Code
 ^!v::  ; Ctrl + Alt + V
 {
     Run("C:\Users\libra\AppData\Local\Programs\Microsoft VS Code\Code.exe")  ; 启动 VSCode
 }
 
-; 打开默认浏览器
+; 快捷键：Ctrl + Alt + B 打开默认浏览器并导航到 Google
 ^!b::  ; Ctrl + Alt + B
 {
     Run("http://www.google.com")  ; 启动默认浏览器并打开 Google
 }
 
-; 打开启动目录
+; 快捷键：Ctrl + Alt + S 打开启动目录
 ^!s::  ; Ctrl + Alt + S
 {
-    Run("explorer shell:startup")  ; 打开启动目录
+    Run("explorer shell:startup")  ; 打开 Windows 启动目录
 }
 
-; 鼠标事件
+; 快捷键：Ctrl + Alt + O 鼠标绘制图形或点击点集
 ^!o::  ; Ctrl + Alt + O
 {
-
-    ; 定义一个点集（x坐标、y坐标、延迟delay）
+    ; 定义点集，每个点包含 x 坐标、y 坐标和延迟时间（单位：毫秒）
     points := [
         {x: 100, y: 0, delay: 30},
         {x: 71, y: 71, delay: 40},
@@ -46,41 +45,45 @@
         {x: 71, y: -71, delay: 40}
     ]
 
-    ; 操作有两个
-    DrawPolygon(points) ; 连接点集中的每个点用鼠标绘制一个图形
-    ; ClickPoints(points)   ; 点击点集中的每个点
+    ; 执行鼠标绘制多边形操作
+    DrawPolygon(points)  ; 连接点集中的每个点，用鼠标绘制一个多边形
+    ; ClickPoints(points) ; 可替代操作：点击点集中的每个点
 }
 
-
-; 参考 https://www.autohotkey.com/docs/v2/lib/MouseClick.htm
-
+; 函数：根据给定的点集用鼠标绘制一个多边形
 DrawPolygon(points)
 {
-    MouseGetPos(&startX, &startY)  ; 获取当前鼠标位置
-    MouseClick("left", startX + points[1].x, startY + points[1].y, 1, 0, "D")  ; 按下左键
+    ; 获取当前鼠标的初始位置
+    MouseGetPos(&startX, &startY)  
 
-    ; 遍历从第二个点开始到最后一个点
+    ; 移动到第一个点并按下鼠标左键
+    MouseClick("left", startX + points[1].x, startY + points[1].y, 1, 0, "D")  
+
+    ; 遍历点集，从第二个点开始绘制
     for index, point in points
     {
-        if (index > 1)  ; 跳过第一个点，开始从第二个点绘制
+        if (index > 1)  ; 跳过第一个点，开始绘制第二个点到最后一个点
         {
             MouseMove(startX + point.x, startY + point.y, 0)  ; 移动到指定点
-            Sleep(point.delay)  ; 等待一段时间，以确保鼠标移动完毕
+            Sleep(point.delay)  ; 延迟以确保鼠标移动的平滑
         }
     }
 
-    MouseClick("left", startX + points[1].x, startY + points[1].y, 1, 0, "U")  ; 释放左键
+    ; 返回到第一个点并释放鼠标左键，完成绘制
+    MouseClick("left", startX + points[1].x, startY + points[1].y, 1, 0, "U")  
 }
 
+; 函数：在给定的点集位置进行点击操作
 ClickPoints(points)
 {
-    ; 基于指定坐标为基点
+    ; 设置基准坐标（500, 500）
     startX := 500
     startY := 500
 
+    ; 遍历点集并执行鼠标点击操作
     for point in points
     {
-        MouseClick("left", startX + point.x, startY + point.y,1,0)
-        Sleep(point.delay)
+        MouseClick("left", startX + point.x, startY + point.y, 1, 0)  ; 点击点集中的每个点
+        Sleep(point.delay)  ; 延迟，确保点击动作可见
     }
 }
