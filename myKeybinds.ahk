@@ -52,6 +52,8 @@
 }
 
 
+; 参考 https://www.autohotkey.com/docs/v2/lib/MouseClick.htm
+
 DrawPolygon(points)
 {
     MouseGetPos(&startX, &startY)  ; 获取当前鼠标位置
@@ -72,6 +74,7 @@ DrawPolygon(points)
 
 ClickPoints(points)
 {
+    ; 基于指定坐标为基点
     startX := 500
     startY := 500
 
