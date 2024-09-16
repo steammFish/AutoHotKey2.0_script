@@ -1,37 +1,37 @@
 ﻿; AutoHotkey v2 脚本
 
 ; 快捷键：Win + T 打开 Windows Terminal (PowerShell)
-#t::  ; Win + T
+#t::
 {
     Run("wt")  ; 启动 Windows Terminal (PowerShell)
 }
 
 ; 快捷键：Ctrl + Alt + W 关闭当前活动窗口
-^!w::  ; Ctrl + Alt + W
+^!w:: 
 {
     WinClose("A")  ; 关闭当前活动窗口，"A" 代表当前窗口
 }
 
 ; 快捷键：Ctrl + Alt + V 打开 Visual Studio Code
-^!v::  ; Ctrl + Alt + V
+^!v:: 
 {
     Run("C:\Users\libra\AppData\Local\Programs\Microsoft VS Code\Code.exe")  ; 启动 VSCode
 }
 
 ; 快捷键：Ctrl + Alt + B 打开默认浏览器并导航到 Google
-^!b::  ; Ctrl + Alt + B
+^!b::
 {
     Run("http://www.google.com")  ; 启动默认浏览器并打开 Google
 }
 
 ; 快捷键：Ctrl + Alt + S 打开启动目录
-^!s::  ; Ctrl + Alt + S
+^!s::
 {
     Run("explorer shell:startup")  ; 打开 Windows 启动目录
 }
 
 ; 快捷键：Ctrl + Alt + O 鼠标绘制图形或点击点集
-^!o::  ; Ctrl + Alt + O
+^!o::
 {
     ; 定义点集，每个点包含 x 坐标、y 坐标和延迟时间（单位：毫秒）
     points := [
